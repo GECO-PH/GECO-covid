@@ -1,11 +1,8 @@
-### Latest
+### Latest GECO-PH report
 
-https://nextstrain.org/community/boydorr/GECO-covid@main/20211020d?dmin=2021-06-01&f_country=Philippines
+[2021-November](https://geco-ph.github.io/GECO-covid/)
 
 ***
 
-### Updates 
+### Previous reports (in pdf) 
 
-20210727 - available sequences on GISAID = 5307 
-
-20211020 - 7134
