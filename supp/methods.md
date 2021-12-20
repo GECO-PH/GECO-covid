@@ -13,4 +13,6 @@ The goal to conduct the Nextstrain pipeline is to understand temporal patterns i
 Sequences submitted to the REDCap depository for GECO will be subject to _Grapevine-anywhere_ pipeline. The pipeline will annotate each SARS-CoV2 genomic sequence with names of different classification methods (e.g. Pango or PH cluster) if the sequence passes basic rules for quality control.  Intuitively, a short sequence (sequence length) or a sequence with too many 'N' (coverage) should be less informative and sometimes problematic for lineage designation, and so the criteria are set to filter out low quality sequences in advance to  further phylogenetic analyses. Bioinformatic pipelines also tend to remove entries with identical information (deduplication). Default filtering parameters for our _Grapevine-anywhere_ pipeline can be found [here](https://github.com/GECO-PH/grapevine-anywhere/blob/main/config.yaml).
 
 
+#### [GECO Website](https://www.geco-seqlab.org/)
+#### [GECO Monthly Report](https://geco-ph.github.io/GECO-covid/)
 
