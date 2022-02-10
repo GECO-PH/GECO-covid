@@ -1,0 +1,388 @@
+---
+title: "GECO Philippines SARS-CoV-2 Situation Report - 2022 January"
+output: 
+  html_document:
+    df_print: paged
+    keep_md: yes
+    theme: united
+    highlight: tango
+    toc: true
+    toc_float: true
+    toc_depth: 2
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r setting, message = FALSE, warning = FALSE, echo = FALSE}
+
+require( ggplot2 )
+require( dplyr )
+require( lubridate )
+require( stringr )
+
+config = yaml::read_yaml("../config.yaml")
+
+geo_admin_csv = config$ph_geo_admin_table
+geo_admin     = read.csv( geo_admin_csv, header = TRUE )
+
+table1_csv    = list.files( config$folder_most_recent, pattern = "table1", full.names = TRUE )
+table2_csv    = list.files( config$folder_most_recent, pattern = "table2", full.names = TRUE )
+table3_csv    = list.files( config$folder_most_recent, pattern = "table3", full.names = TRUE )
+
+seq_csv    = list.files( config$folder_most_recent, pattern = "sequencing_", full.names = TRUE )
+region_csv = list.files( config$folder_most_recent, pattern = "R_region", full.names = TRUE )
+
+logo_file = "logo.jpg"
+
+```
+
+
+
+```{css, echo=FALSE}
+h1, h2{
+  text-align: center;
+  font-family: Helvetica;
+  font-weight: bold;
+}
+
+body{
+  margin-top: 75px;
+  font-family: Helvetica;
+  font-weight: lighter;
+  font-size: 14pt;
+}
+
+```
+
+$~$
+
+## Highlights
+
+$~$
+
+<h4> * Omicron variant accounts for most of the sequences isolated in December, 2021. </h4>
+
+<h4> * Locally circulating Omicron viruses most likely belong to BA.2 lineage. </h4>  
+
+$~$
+$~$
+
+## SARS-CoV-2 variants detected in the Philippines 
+
+$~$
+
+```{r general info, echo=FALSE, warning=FALSE, message=FALSE}
+
+# metadata = readr::read_tsv( list.files( config$folder_most_recent, pattern = "postNS", full.names = TRUE ))
+# 
+# nrow( metadata ) #12973
+# length( which( metadata$source == "GECO" ) ) # 514
+
+# metadata %>%
+#   filter( Variant == "VOC Delta" ) %>%
+#   group_by( `Pango lineage` ) %>%
+#   dplyr::count()
+
+
+```
+
+
+
+```{r table1, echo=FALSE, warning=FALSE}
+
+
+table1 = read.csv( table1_csv )
+
+names(table1) = c( "WHO label", "Pango lineage", "Classification", 
+                   "New submission", "Isolated in 4 months",
+                   "Total" )
+
+table1
+
+```
+<strong>Table 1. Number of available sequences by variant in the Philippines as of 20 January 2022.</strong> The variants (VOC/VUM) here only include sequences that present in the GISAID or GECO data base and fulfill the definitions of WHO at the time the report is prepared. *New submission*, new sequences submitted from the last report. *Isolated in 4 months*, sequences isolated from 1 October 2021 to 20 January 2022. Numbers in the parentheses are percentage of the category (%).
+
+$~$
+
+<body>
+<small> 
+
+* __VOC (Variant of Concern):__ A SARS-CoV-2 variant that meets the definition of a VOI (see below) and, through a comparative assessment, has been demonstrated to be associated with (a) increase in transmissibility, (b) increase in clinical disease presentation or (c) decrease in effectiveness of public health measures including diagnostics, vaccines, therapeutics.
+
+* __VOI (Variant of Interest):__ A SARS-CoV-2 variant: (a) with genetic changes that are predicted or known to affect virus characteristics such as transmissibility, disease severity, immune escape, diagnostic or therapeutic escape; AND (b) identified to cause significant community transmission or multiple COVID-19 clusters, in multiple countries with increasing relative prevalence alongside increasing number of cases over time. 
+
+* __VUM (Variant Under monitoring):__ A SARS-CoV-2 variant with genetic changes that are suspected to affect virus characteristics with some indication that it may pose a future risk, but evidence of phenotypic or epidemiological impact is currently unclear, requiring enhanced monitoring and repeat assessment pending new evidence.
+
+* __Pango lineage:__ A dynamic SARS-CoV-2 naming system that uses a phylogenetic framework (methods that involve a tree-like structure inferred based on genetic information of viruses) to identify actively spreading lineages. The Pango system is designed to track the transmission and spread of SARS-CoV-2, but does not attempt to identify or define VOCs or VOIs.  
+
+</small>
+</body>
+
+
+$~$
+
+```{r figure1, echo=FALSE, warning=FALSE}
+knitr::include_url("https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=variant&d=frequencies&f_country=Philippines&p=full&sidebar=closed&onlyPanels", height = 250)
+
+```
+<strong>Figure 1. Temporal frequencies of SARS-CoV-2 variants in the Philippines.</strong> The figure is constructed with a subsampled genomic data set from all available sequences ([methods](https://github.com/GECO-PH/GECO-covid/blob/main/supp/methods.md)). A more detailed illustration of SARS-CoV-2 lineages isolated in the country can be visualised by selecting PANGO Lineage as the option for coloring in the control panel (icon on top left/right). __Note__ that the latest available Philippine sequences were isolated on 28 December, 2021, thus the frequencies after the time point could harbor great uncertainty. 
+
+$~$
+
+__Diversity within the Omicron variant__
+
+The two sublineages of the Omicron variant, denoted as BA.1 and BA.2, have been identified in the Philippines since December 2021. Based on the available data, all BA.2 sequences isolated in the Philippines (n=39) were likely originated from the same introduction. These sequences were also identified by the grapevine-anywhere pipeline as a single cluster (PH_137, see *PH specific lineages* section). Phylogenetic relationship of the sublineages of Omicron variant is available [here](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=pango_lineage&d=tree,map,frequencies&f_country=Philippines&label=clade:21K%20%28Omicron%29&p=full&sidebar=closed). Note that the BA.2 viruses do not have 69-70 deletions in the S protein, and therefore the SGTF (S-gene target failure) may not be used to detect the lineage (see *mutations of interest* section).
+
+
+$~$
+
+__Diversity within the Delta variants__
+
+More than 70 Pango lineages have been found among Delta variants isolated in the Philippines, with >40 sublineages that have more than 2 isolated sequences as of January 2022. Among the sublineages of Delta variant, AY.28 is the most frequently isolated lineage in the Philippines, followed by AY.9.2. Phylogenetic relationship of the sublineages of Delta variant is available [here](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=pango_lineage&d=tree,map,frequencies&f_country=Philippines&label=clade:21A%20%28Delta%29&p=full&sidebar=closed).
+
+
+
+$~$
+$~$
+
+## SARS-CoV-2 variants detected by administrative region
+
+$~$
+
+```{r table2, warning=FALSE, echo=FALSE}
+
+table2 = read.csv( table2_csv )
+
+names(table2) = c( "Region", "New submission", "Dominant variant in 4 months",
+                   "Isolated in 4 months", "Total" )
+
+table2
+
+```
+<strong>Table 2. Number of available sequences by administrative region in the Philippines as of 20 January 2022.</strong> The variant definition is identical to Table 1 based on the WHO website. *New submission*, new sequences submitted from the last report. *Dominant variant in 4 months*, the major variant isolated from 1 October 2021 to 20 January 2022. A dash indicates no sequence isolated. *Isolated in 4 months*, sequences isolated from 1 October 2021 to 20 January 2022. Numbers next to the dominant variant indicate percentage of the variant in the region, whereas other numbers in the parentheses are percentage of the category.
+
+<body>
+<font size="3">
+NCR, National Capital Region; CAR, Cordillera Administrative Region; BARMM, Bangsamoro Autonomous Region in Muslim Mindanao. 
+</font>
+</body>
+
+$~$
+
+```{r figure2, echo=FALSE, warning=FALSE}
+knitr::include_url("https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=variant&d=map&f_country=Philippines&p=full&sidebar=closed&onlyPanels", height = 600)
+
+```
+<strong>Figure 2. Frequencies of SARS-CoV-2 variants by administrative region in the Philippines.</strong> The figure is constructed with a subsampled genomic data set from all available sequences as Figure 1. Frequencies of isolates in a particular time frame can be adjusted with the control panel (icon on top left/right).  
+
+
+$~$
+$~$
+
+
+## Philippines specific SARS-CoV-2 lineages 
+
+$~$
+
+```{r Figure 3, echo=FALSE, warning=FALSE}
+knitr::include_url("https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=cluster&d=frequencies&f_source=GECO&onlyPanels&p=full&sidebar=closed", height = 250)
+
+```
+<strong>Figure 3. Temporal frequencies of Philippine lineages (clusters) identified by [Grapevine-anywhere](https://github.com/GECO-PH/grapevine-anywhere).</strong> Each sequence submitted to GECO database would undergo *Grapevine-anywhere* pipeline to detect sustain local transmission. A cluster is defined based on multiple sequences isolated in the Philippines that appeared to descend from the same introductory event on a phylogenetic tree. Phylogenetic relationships of these lineages can be found [here](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=cluster&d=tree&f_country=Philippines&onlyPanels&p=full&sidebar=closed).
+
+
+
+$~$
+
+
+```{r table3, warning=FALSE, echo=FALSE}
+
+table3 = read.csv( table3_csv )
+
+names(table3) = c( "Cluster name", "Date first identified", "Pango lineage",
+                   "Distribution", "New submission", "Isolated in 4 months", "Total" )
+
+table3
+
+```
+<strong>Table 3. Number of sequences by cluster identified with the Grapevine-anywhere as of 20 January 2022.</strong> A cluster is defined based on multiple sequences isolated in the Philippines that appeared to descend from the same introductory event on a phylogenetic tree. *Date first identified*, the isolation date of the first identified sequence. *Pango lineage*, the major Pango lineage of the sequences that belong to the same cluster. *New submission*, new sequences submitted from the last report. *Isolated in 4 months*, sequences isolated from 1 October 2021 to 20 January 2022.
+
+
+$~$
+$~$
+
+## SARS-CoV-2 sequencing in the Philippines
+
+$~$
+
+
+### Total available SARS-CoV-2 sequences in the Philippines: **13191**
+### SARS-CoV-2 sequences from GECO project: **698**
+
+$~$
+
+```{r figure 4, echo=FALSE, warning=FALSE, fig.retina=2, fig.align='center', fig.width=8}
+
+seq_data = read.csv( seq_csv, header = TRUE )
+
+seq_data = 
+seq_data %>%
+  filter( year_month != "2020_1" ) %>%
+  filter( year_month != "2020_2" )
+
+
+jhu_data = read.csv( list.files( config$folder_most_recent, 
+                                          pattern = "case_JHU_PH", full.names = TRUE ),
+                              header = TRUE )
+
+laste_date = max( jhu_data$date )
+
+ggplot() +     
+  geom_line( data = jhu_data, aes( x = ymd(date), y = cases_07 ), size = 1.1, color = "#7f7f7f" ) +
+  geom_segment( data = seq_data, aes( x = ymd(date), xend = ymd(date), y = 0, yend = prop*5000 ), 
+                color = "#d62728", alpha = 0.2, size = 5 ) +
+  geom_point( data = seq_data, aes( x = ymd(date),  y = prop*5000 ), 
+              size = 5, color = "#d62728", alpha = 1 ) +
+  scale_x_date( date_labels = "%b %d \n %y" ) + 
+  scale_y_continuous( limits = c(0, 40000),
+                       sec.axis = sec_axis(~ ./5000, name = "Proportion of sequenced (%)")  ) +
+  labs( x="", y="Cases (7-day avg)") + 
+  theme_classic() +
+  theme( axis.line.y = element_blank(),
+         axis.text    = element_text(size = 14),
+         axis.title   = element_text(size = 14) ) +
+  ggtitle( paste0( "Last date: ",  laste_date) )
+
+```
+<strong>Figure 4. Number of COVID-19 cases and the proportion of sequenced samples in the Philippines.</strong> The gray line indicates the mean cases in a 7 days window based on the JHU data base, whereas the red bars indicate the estimated percentage of sequenced samples among cases in a month. The proportions in January and February, 2020 were discarded as they are outliers.
+
+
+$~$
+$~$
+
+## Epidemiology of COVID-19 in the Philippines
+
+$~$
+
+```{r figure 5, echo=FALSE, warning=FALSE, fig.retina=2, fig.align='center', fig.width=10}
+
+R_region  = read.csv( region_csv, header = TRUE )
+laste_date = max( R_region$date )
+early_date = "2021-12-01"
+
+.unique_region = unique( R_region$region )
+
+.Rt = as.numeric( str_match( unique( R_region$region_current ), "R = ([0-9\\.]+)" )[,2] ) 
+.R_order = sort( .Rt, decreasing = TRUE, index.return = TRUE )$ix
+
+.n_Rt_1 = length( which( .Rt > 1 ) )
+
+R_region$region = factor( R_region$region, levels = .unique_region[ .R_order ] )
+
+.col   = geo_admin$color[ match( .unique_region[ .R_order ], geo_admin$working ) ]
+.alpha = c( rep( 1, .n_Rt_1 ), rep( 0.5, (17-.n_Rt_1) ) )
+
+ggplot() +
+  geom_line( data = R_region, aes(x = ymd(date), y = mean, color = region, alpha = region ), size = 1.2 ) +
+  geom_point( data = subset( R_region, date == laste_date), 
+              aes(x = ymd(date), y = mean, color = region ),  size = 1.5 ) +
+  scale_y_continuous( limits = c(0.25, 6) ) +
+  scale_x_date( limits = c( ymd( early_date ), ymd( laste_date ) ), 
+                date_breaks  = "1 month", date_labels = "%b %d" ) +
+  geom_hline( yintercept = 1, size=0.5 ) +
+  labs( x="", y= "Rt" ) + 
+  theme_classic() +
+  theme( legend.title = element_blank(),
+         axis.text    = element_text(size = 14),
+         axis.title   = element_text(size = 14),
+         panel.grid.major.x = element_line( color = "#7f7f7f", size = 0.2, linetype = "dashed" )  ) +
+  scale_color_manual( values = .col, 
+                      labels = unique( R_region$region_current )[.R_order] )+
+  scale_alpha_manual( values = .alpha, guide="none" ) +
+  ggtitle( paste0( "Last date: ",  laste_date) )  
+
+```
+<strong>Figure 5. Mean effective reproductive number (Rt) of COVID-19 in the Philippines by region from December 2021 to January, 2022.</strong> The reproductive number (R) is defined as the number of new infections that one infected patient can cause in a susceptible population. Here, *the mean effective reproductive number* (Rt) was inferred by daily number of cases reported in MOH, Philippines in a window of seven days. The horizontal line indicates one. If Rt is greater than 1, the case number in the region will likely continue to grow. If the Rt is below 1, the new cases may continue to appear at a slower rate. The R values denoted with the region name represent the most recent estimates. More regional epidemiological statistics can be found [here](https://github.com/GECO-PH/GECO-covid/blob/main/supp/region.md).
+
+
+$~$
+$~$
+
+
+## SARS-CoV-2 mutations of interest
+
+Spike protein
+
+* __69-70Del__ (Alpha, Omicron): [Distribution on the Philippine isolates](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=variant&d=tree&f_country=Philippines&gt=S.69-,70-&onlyPanels&p=full&sidebar=closed)
+
+* __T95I__ (Mu, Omicron): [Distribution on the Philippine isolates](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=gt-S_95&d=tree&f_country=Philippines&onlyPanels&p=full&sidebar=closed)
+
+* __144-__ (Alpha, Eta, Omicron): [Distribution on the Philippine isolates](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=gt-S_144&d=tree&f_country=Philippines&onlyPanels&p=full&sidebar=closed)
+
+* __K417N__ (Beta, Omicron): [Distribution on the Philippine isolates](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=gt-S_417&d=tree&f_country=Philippines&onlyPanels&p=full&sidebar=closed)
+
+* __T478K__ (Delta, Omicron): [Distribution on the Philippine isolates](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=gt-S_478&d=tree&f_country=Philippines&onlyPanels&p=full&sidebar=closed)
+
+* __E484K__ (Beta, Gamma, Eta, Mu): [Distribution on the Philippine isolates](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=gt-S_484&d=tree&f_country=Philippines&onlyPanels&p=full&sidebar=closed)
+
+* __N501Y__ (Alpha, Beta, Gamma, Mu, Omicron): [Distribution on the Philippine isolates](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=gt-S_501&d=tree&f_country=Philippines&onlyPanels&p=full&sidebar=closed)
+
+* __H655Y__ (Gamma, Omicron): [Distribution on the Philippine isolates](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123?c=gt-S_655&d=tree&f_country=Philippines&onlyPanels&p=full&sidebar=closed)
+
+$~$
+
+<body>
+<small> 
+
+Relevant functions including antibody escape (S 69-70Δ, S 144, S 417, S 484) and receptor binding (S 417, S 484, S 501). 69-70Del or 69-70Δ, deletions at positions 69-70. 
+
+</small>
+</body>
+
+
+$~$
+$~$
+
+## Data sources and references
+
+Data
+
+* [GECO website](https://www.geco-seqlab.org)
+* [DOH Data drop](https://drive.google.com/drive/folders/1ZPPcVU4M7T-dtRyUceb0pMAd8ickYf8o)
+* [GISAID](http://gisaid.org) ([acknowledgement table](https://github.com/GECO-PH/GECO-covid/tree/main/acknowledgement_table))
+* [JHU COVID data](https://coronavirus.jhu.edu)
+
+Methods
+
+* [Analyses in this report](https://github.com/GECO-PH/GECO-covid/blob/main/supp/methods.md)
+* [Nextstrain](https://nextstrain.org) ([build](https://nextstrain.org/community/GECO-PH/GECO-covid@main/20220123) for GECO project)
+* [Grapevine-anywhere](https://github.com/GECO-PH/grapevine-anywhere)
+
+References
+
+* [WHO](https://www.who.int/en/activities/tracking-SARS-CoV-2-variants/)
+* [Pango lineage list](https://cov-lineages.org/lineage_list.html)
+
+
+### PDF version and previous reports
+
+2021-11 [pdf](https://github.com/GECO-PH/GECO-covid/blob/main/report/2021-November.pdf)
+
+2021-12 [pdf](https://github.com/GECO-PH/GECO-covid/blob/main/report/2021-December.pdf)
+
+2022-01 [pdf](https://github.com/GECO-PH/GECO-covid/blob/main/report/2022-January.pdf)
+
+$~$
+
+
+```{r figure logo, echo=FALSE, warning=FALSE, fig.retina=2, fig.align='center', fig.width=4}
+
+knitr::include_graphics(logo_file)
+
+```
