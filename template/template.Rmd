@@ -1,0 +1,196 @@
+---
+title: "title here"
+output: 
+  html_document:
+    df_print: paged
+    keep_md: yes
+    theme: united           # find more theme here: https://bootswatch.com/3/
+    highlight: tango
+    toc: true
+    toc_float: true
+    toc_depth: 2
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r setting, message = FALSE, warning = FALSE, echo = FALSE}
+
+# the place where I load necessary packages and files
+
+require( ggplot2 )
+# require( dplyr )
+# require( lubridate )
+# require( stringr )
+
+logo_file = "logo2.png"
+
+```
+
+
+
+```{css, echo=FALSE}
+
+# format the html with CSS
+
+h1, h2{
+  text-align: center;
+  font-family: Helvetica;
+  font-weight: bold;
+}
+
+body{
+  margin-top: 75px;
+  font-family: Helvetica;
+  font-weight: lighter;
+  font-size: 14pt;
+}
+
+```
+
+$~$
+
+## Section title 1
+
+$~$
+
+<h4> * a summary line </h4>
+
+
+$~$
+$~$
+
+## Section title 2 
+
+$~$
+
+```{r general info, echo=FALSE, warning=FALSE, message=FALSE}
+
+# the place where I use to look into the data
+# for example
+
+# metadata = readr::read_tsv( list.files( config$folder_most_recent, pattern = "postNS", full.names = TRUE ))
+# nrow( metadata ) #12973
+# length( which( metadata$source == "GECO" ) ) # 514
+
+
+```
+
+
+
+```{r table1, echo=FALSE, warning=FALSE}
+
+fake_table1 = data.frame( WHO_label     = c( "A_variant", "B_variant" ),
+                          Pango_lineage = c( "A", "B" ),
+                          Total         = c( 123, 456) )
+fake_table1
+
+```
+<strong>legend title.</strong> a figure/table legend here with *words highlighted*.
+
+$~$
+
+<body>
+<small> 
+
+* __note title__ some description for the table
+
+</small>
+</body>
+
+
+$~$
+
+```{r figure1, echo=FALSE, warning=FALSE}
+knitr::include_url("https://www.gla.ac.uk/researchinstitutes/bahcm/", height = 250)
+
+```
+<strong>legend title.</strong> a figure/table legend here with *words highlighted*.
+
+
+$~$
+
+__subsection title__
+
+some text some text
+
+
+$~$
+$~$
+
+## Section title 3
+
+$~$
+
+```{r figure, echo=FALSE, warning=FALSE, fig.retina=2, fig.align='center', fig.width=4}
+
+knitr::include_graphics(path = "fig2.png")
+
+```
+<strong>legend title.</strong> a figure/table legend here with *words highlighted*.
+
+<body>
+<font size="3">
+footnote following the table/figure
+</font>
+</body>
+
+
+
+## Section title 4
+
+$~$
+
+
+### subtitle: **words highlighted**
+
+$~$
+
+```{r figure 4, echo=FALSE, warning=FALSE, fig.retina=2, fig.align='center', fig.width=8}
+
+# a figure generated here 
+
+df2 = data.frame( virus = seq(1,5),
+                  size  = sample(1:10, 5) )
+
+ggplot( df2 )+
+  geom_point( aes(x=virus, y=size) )
+  
+
+```
+<strong>legend title.</strong> a figure/table legend here with *words highlighted*.
+
+
+
+$~$
+$~$
+
+
+
+## Section title 5
+
+
+Data
+
+* [ref1](https://www.gla.ac.uk/researchinstitutes/bahcm/)
+* [ref2](https://www.gla.ac.uk/researchinstitutes/bahcm/)
+
+
+### PDF version and previous reports
+
+2099-99 [pdf](https://github.com/GECO-PH/GECO-covid/blob/main/template/example_pdf.pdf)
+
+
+$~$
+
+
+```{r figure logo, echo=FALSE, warning=FALSE, fig.retina=2, fig.align='center', fig.width=4}
+
+knitr::include_graphics(logo_file)
+
+```

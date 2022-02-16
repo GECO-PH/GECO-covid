@@ -1,10 +1,15 @@
 ### example.Rmd 
 
-This file is used to generate (1) example.md, (2) example.html and (3) a folder example_files
+This file is used to generate (1) example.md, (2) example.html and (3) example_files [folder]
 
 ### example_pdf.Rmd
 
 This file will generate example_pdf.pdf
+
+### template.Rmd / template_pdf.Rmd
+
+Files with simplified content to demonstrate the Rmd format
+
 
 
 ### To deploy the html on Github

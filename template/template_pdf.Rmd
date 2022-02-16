@@ -1,0 +1,183 @@
+---
+title: "title here"
+output: 
+  
+  pdf_document: default
+editor_options: 
+  
+  chunk_output_type: console
+urlcolor: blue
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library( knitr )
+
+```
+
+
+```{r setting, message = FALSE, warning = FALSE, echo = FALSE}
+
+# the place where I load necessary packages and files
+
+require( ggplot2 )
+# require( dplyr )
+# require( lubridate )
+# require( stringr )
+
+logo_file = "logo2.png"
+
+```
+
+
+
+```{css, echo=FALSE}
+
+# format the html with CSS
+
+h1, h2{
+  text-align: center;
+  font-family: Helvetica;
+  font-weight: bold;
+}
+
+body{
+  margin-top: 75px;
+  font-family: Helvetica;
+  font-weight: lighter;
+  font-size: 14pt;
+}
+
+```
+
+
+## Section title 1
+
+
+<h4> * a summary line </h4>
+
+$~$
+$~$
+
+## Section title 2 
+
+
+```{r general info, echo=FALSE, warning=FALSE, message=FALSE}
+
+# the place where I use to look into the data
+# for example
+
+# metadata = readr::read_tsv( list.files( config$folder_most_recent, pattern = "postNS", full.names = TRUE ))
+# nrow( metadata ) #12973
+# length( which( metadata$source == "GECO" ) ) # 514
+
+
+```
+
+
+
+```{r table1, echo=FALSE, warning=FALSE}
+
+
+fake_table1 = data.frame( WHO_label     = c( "A_variant", "B_variant" ),
+                          Pango_lineage = c( "A", "B" ),
+                          Total         = c( 123, 456) )
+kable(fake_table1)
+
+
+```
+__legend title.__ a figure/table legend here with *words highlighted*.
+
+$~$
+
+<body>
+<small> 
+
+* __title__ more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words
+
+</small>
+</body>
+
+
+
+\begin{center}
+\includegraphics[width=1\columnwidth]{"fig1.pdf"}
+\end{center}
+
+__legend title.__ a figure/table legend here with *words highlighted*.
+
+
+$~$
+
+__subsection title__
+
+more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words more words
+
+
+
+
+$~$
+$~$
+
+## Section title 3
+
+\begin{center}
+\includegraphics[width=1\columnwidth]{"fig2.png"}
+\end{center}
+
+__legend title.__ a figure/table legend here with *words highlighted*.
+
+<body>
+<font size="3">
+footnote following the table/figure
+</font>
+</body>
+
+
+$~$
+$~$
+
+
+## Section title 4
+
+
+### subtitle: **words highlighted**
+
+
+$~$
+
+```{r figure 4, echo=FALSE, warning=FALSE, fig.retina=2, fig.align='center', fig.width=7}
+
+# a figure generated here 
+
+df2 = data.frame( virus = seq(1,5),
+                  size  = sample(1:10, 5) )
+
+ggplot( df2 )+
+  geom_point( aes(x=virus, y=size) )
+
+```
+<strong>legend title.</strong> a figure/table legend here with *words highlighted*.
+
+
+$~$
+$~$
+
+
+
+## Section title 5
+
+
+Data
+
+* [ref1](https://www.gla.ac.uk/researchinstitutes/bahcm/)
+* [ref2](https://www.gla.ac.uk/researchinstitutes/bahcm/)
+
+
+$~$
+
+
+\begin{center}
+\includegraphics[width=0.4\columnwidth]{"logo2.png"}
+\end{center}
+
