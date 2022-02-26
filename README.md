@@ -1,6 +1,6 @@
 ### Latest GECO-PH report
 
-[2021-December](https://geco-ph.github.io/GECO-covid/)
+[2022-February](https://geco-ph.github.io/GECO-covid/)
 
 ***
 
@@ -8,4 +8,7 @@
 
 2021-November 
 
+2021-December
+
+2022-January
 
