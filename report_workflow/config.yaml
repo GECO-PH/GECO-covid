@@ -1,0 +1,10 @@
+ph_geo_admin_table: ~/Desktop/publish/ph_data/geo_admin.csv
+folder_most_recent: ~/Desktop/publish/ph_data/most_recent
+folder_previous: ~/Desktop/publish/ph_data/previous
+ph_gisaid_metadata: metadata_gisaid_PH.tsv
+redcap_metadata: redcap_metadata.strain.formatted.csv
+redcap_fas: redcap_formatted.fasta
+redcap_rawdata: redcap_metadata.csv
+grapevine_output: redcap_gisaid.lineages.with_all_traits.with_phylotype_traits.csv
+doh_case_info: ['DOH_batch_1.csv', 'DOH_batch_2.csv', 'DOH_batch_3.csv', 'DOH_batch_4.csv', 'DOH_batch_5.csv']
+alias_key: alias_key.json

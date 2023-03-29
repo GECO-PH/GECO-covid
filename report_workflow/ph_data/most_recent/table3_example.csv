@@ -1,0 +1,5 @@
+cluster,first_identified,cluster_pango,cluster_dist,new_from_last_report,new_period,cumulative
+PH_421,2022-01-10,BA.2.3.20,>3 regions,0,153,861
+PH_41,2022-09-15,XBB,>3 regions,0,38,617
+PH_413,2022-10-17,BA.2,>3 regions,0,7,19
+
