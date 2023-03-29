@@ -3,19 +3,23 @@
 
 #### Data collection
 - [ ] GISAID & Accession number table
-- [ ] REDCap (updating background dataset?)
+- [ ] _Grapevine-anywhere_ 
+	- [ ] PH background dataset
 - [ ] MOH
 
 
 #### Processing
 - [ ] metadata.R
-- [ ] Nextstrain
+- [ ] _Nextstrain_
 - [ ] DOH_data.R
 - [ ] post_ns.R
-- [ ] Table.x.R
+- [ ] Table.X.R
 - [ ] jhu_data.R / Rt.R / sequencing.R
 
 
 #### Formating RMD 
 - [ ] Nextstrain build version / date in the legends
 - [ ] PDF
+	- [ ] YAML header
+	- [ ] Title style
+	- [ ] Inserting figures and logo
